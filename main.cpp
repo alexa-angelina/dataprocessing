@@ -1,10 +1,10 @@
-#include <database.h>
+#include "database.h"
 
 int main(){
     database db;
 
     // should return null, because A doesn’t exist in the DB yet
-    cout<<db.get("A")<<endl;
+    db.get("A");
 
     // should throw an error because a transaction is not in progress
     db.put("A", 5);
@@ -16,7 +16,7 @@ int main(){
     db.put("A", 5);
 
     // should return null, because updates to A are not committed yet
-    cout<<db.get("A")<<endl;
+    db.get("A");
 
     // update A’s value to 6 within the transaction
     db.put("A", 6);
@@ -25,7 +25,7 @@ int main(){
     db.commit();
 
     // should return 6, that was the last value of A to be committed
-    cout<<db.get("A")<<endl;
+    db.get("A");
 
     // throws an error, because there is no open transaction
     db.commit();
